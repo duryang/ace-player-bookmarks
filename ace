@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# TODO: header, author, etc...
+
+CHANNELS_FILE=./channels
+
+start_engine () {
+  local engine_session="ace--engine"
+  local all_sessions=$(tmux ls 2>/dev/null)
+
+  if [[ ${all_sessions} == *${engine_session}* ]]; then
+    echo "Engine already started..."
+  else
+    echo "Starting the engine..."
+    tmux new -d -s ${engine_session} 'acestreamplayer.engine'
+    sleep 2
+  fi
+}
+
+load_channels () {
+  channels=()
+  while IFS= read -r line; do
+    channels+=("${line}")
+  done < ${CHANNELS_FILE}
+}
+
+# Prints the channels to stdout as a table
+list_channels () {
+  load_channels
+
+  # print the table header
+  echo "+----+-------------------------------+----------+"
+  echo "| #  |            Channel            | Language |"
+  echo "+----+-------------------------------+----------+"
+  
+  # print the rows
+  for index in ${!channels[@]}; do
+    IFS=',' read -r name lang channel <<< ${channels[$index]}
+    printf "| %-2s | %-29s | %-8s |\n" "$(expr $index + 1)" "${name}" "${lang}"
+  done
+
+  # print the table footer
+  echo "+----+-------------------------------+----------+"
+}
+
+play () {
+  load_channels
+  
+  index_0_based=$(expr $1 - 1)
+
+  IFS=',' read -r name lang channel <<< ${channels[${index_0_based}]}
+
+  if [[ $1 -lt 1 || $1 -gt ${#channels[@]} ]]; then
+    echo "Channel #"$1" does not exist."
+  else
+    start_engine
+    echo "Playing channel "${name}
+    tmux new -d -s "ace--mpv--"$1 "acestreamplayer.mpv"${channel}
+  fi
+}
+
+if [[ $1 == "list" ]]; then
+  list_channels
+elif [[ $1 == "play" ]]; then
+  play $2
+else
+  echo "Unknown command."
+fi
+
