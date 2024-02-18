@@ -1,6 +1,15 @@
 #!/bin/bash
 
-# TODO: header, author, etc...
+########################################
+#
+# Author: Gor Duryan
+#
+# Because Ace Player is such a pain in the a$$
+# and doesn't allow save bookmarks,
+# this script allows to save your favorite channels
+# and play them easily from command line.
+#
+########################################
 
 CHANNELS_FILE=./channels
 
