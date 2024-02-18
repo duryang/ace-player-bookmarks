@@ -2,7 +2,7 @@
 Stream live TV channels using Ace Stream software.\
 This is just a script that allows to load channels from a file and play them using a convenient CLI.
 ## Disclaimer
-Stream at your own risk and responsibility. It might not be entirely legal depending on your location.
+**Stream at your own risk and responsibility. It might not be entirely legal depending on your location.**
 ## Prerequisites
 - *acestreamplayer.mpv & acestreamplayer.engine*\
 Can be installed from the snap store on Linux systems:\
