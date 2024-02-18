@@ -12,3 +12,6 @@ Used to run the channels in background. Install using your system's package mana
 The channels are included in the "channels" file.
 It is just a sample for some sports channels that I watch. Feel free to have your own channels.\
 *acestreamsearch.net* is your friend.
+## Usage
+- To list the channels: `ace list`
+- To play a channel: `ace play <channel number>`
