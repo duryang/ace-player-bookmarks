@@ -4,10 +4,11 @@
 #
 # Author: Gor Duryan
 #
-# Because Ace Player is such a pain in the a$$
-# and doesn't allow save bookmarks,
-# this script allows to save your favorite channels
-# and play them easily from command line.
+# Because Ace Player is such a pain in
+# the a$$ and doesn't allow to save 
+# bookmarks, this script allows to load
+# your favorite channels from a file and
+# play them easily from command line.
 #
 ########################################
 
