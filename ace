@@ -14,19 +14,6 @@
 
 CHANNELS_FILE=./channels
 
-start_engine () {
-  local engine_session="ace--engine"
-  local all_sessions=$(tmux ls 2>/dev/null)
-
-  if [[ ${all_sessions} == *${engine_session}* ]]; then
-    echo "Engine already started..."
-  else
-    echo "Starting the engine..."
-    tmux new -d -s ${engine_session} 'acestreamplayer.engine'
-    sleep 2
-  fi
-}
-
 load_channels () {
   channels=()
   while IFS= read -r line; do
@@ -63,7 +50,6 @@ play () {
   if [[ $1 -lt 1 || $1 -gt ${#channels[@]} ]]; then
     echo "Channel #"$1" does not exist."
   else
-    start_engine
     echo "Playing channel "${name}
     tmux new -d -s "ace--mpv--"$1 "acestreamplayer.mpv"${channel}
   fi
